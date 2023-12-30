@@ -1,0 +1,64 @@
+<div class="tab-container">
+  <ul class="tab-navigation">
+    {% for tab in section.settings.tabs %}
+      <li class="tab-navigation-item">
+        <a href="#" data-tab="{{ forloop.index }}">{{ tab.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% for tab in section.settings.tabs %}
+    <div class="tab-content" data-tab="{{ forloop.index }}">
+      {{ tab.content | strip_html }}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .tab-container {
+    width: 100%;
+  }
+
+  .tab-navigation {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  .tab-navigation-item {
+    margin-right: 10px;
+  }
+
+  .tab-content {
+    display: none;
+  }
+</style>
+
+<script>
+  const tabNavigationItems = document.querySelectorAll('.tab-navigation-item');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabNavigationItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const selectedTab = item.querySelector('a').dataset.tab;
+
+      tabNavigationItems.forEach((navItem) => {
+        navItem.classList.remove('active');
+      });
+
+      tabContents.forEach((content) => {
+        content.style.display = 'none';
+      });
+
+      item.classList.add('active');
+      document.querySelector(`.tab-content[data-tab="${selectedTab}"]`).style.display = 'block';
+    });
+  });
+</script>
+
+
+
+
