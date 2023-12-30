@@ -454,6 +454,18 @@
     }
   };
   setTimeout(theme.setInitialHeaderHeightProperty, 0);
+
+  document.querySelector("body").addEventListener("click", (event) => {
+    if (event.target.closest(".navigation__tier-1") &&  event.target.tagName == "A") {
+      event.preventDefault();
+      const linkWithoutOrigin = event.target.href.split(window.location.origin)[1];
+      const linkWithoutHash = linkWithoutOrigin.split("#")[0].split("?")[0];
+      if (window.location.pathname == linkWithoutHash) {
+        window.location.href = event.target.href;
+        theme.closeMobileNav();
+      }
+    }
+  })
 </script>
 {%- endif -%}
 

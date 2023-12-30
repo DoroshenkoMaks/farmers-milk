@@ -7059,6 +7059,13 @@
       }
     });
 
+    theme.closeMobileNav = function () {
+      $('body').removeClass('reveal-mobile-nav reveal-mobile-nav--revealed');
+      setTimeout(function () {
+        $('body').removeClass('enable-mobile-nav-transition');
+      }, 750);
+    }
+
     theme.openMobileNav = function () {
       $('body').addClass('enable-mobile-nav-transition');
       setTimeout(function () {
